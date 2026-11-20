@@ -1,0 +1,19 @@
+#!/bin/sh
+
+export LUNAR="CHANGE_ME"
+
+if [[ "$LUNAR" == "CHANGE_ME" ]]; then
+	echo "You need to set the path you installed LunarG into as LUNAR in ./lunar script"
+	echo "Then source the lunar script itself to continue."
+	exit 1
+fi
+
+export VULKAN_SDK="$LUNAR/macOS"
+export PATH="$VULKAN_SDK/bin:$PATH"
+export DYLD_LIBRARY_PATH="$VULKAN_SDK/lib:$DYLD_LIBRARY_PATH"
+export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
+export VK_DRIVER_FILES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
+export VK_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
+./vk_version
+echo "\n[  OK  ] LunarG Vulkan environment enabled..."
+
